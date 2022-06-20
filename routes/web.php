@@ -19,7 +19,10 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts');
+
+    return view('posts', [
+        'posts' => Post::all(),
+    ]);
 });
 
 Route::get('/posts/{post}', function ($slug) {
