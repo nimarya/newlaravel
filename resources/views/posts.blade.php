@@ -4,10 +4,10 @@
 @foreach ($posts as $post)
 <article>
     <h1>
-        <a href="posts/{{ $post->slug; }}">{{ $post->title; }}</a>
+        <a href="/posts/{{ $post->slug; }}">{{ $post->title; }}</a>
     </h1>
     <p>{{ $post->excerpt; }}</p>
-    <p>{{ $post->category->name; }}</p>
+    <p><a href="categories/{{ $post->category->slug; }}">{{ $post->category->name; }}</a></p>
 </article>
 @endforeach
 @endsection
