@@ -24,6 +24,7 @@ Route::get('/posts', function () {
 
     return view('posts', [
         'posts' => Post::latest()->get(),
+        'categories' => Category::all(),
     ]);
 });
 

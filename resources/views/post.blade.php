@@ -1,10 +1,7 @@
-@extends('layout')
+<x-layout>
+    <x-slot name="slot">
 
-@section('content')
-<article>
-    <h1>{{$post->title;}}</h1>
-    <p>{!! $post->body; !!}</p>
-</article>
-<p>written by <a href="/authors/{{ $post->author->username; }}">{{ $post->author->name; }}</a> in <a href="/categories/{{ $post->category->slug; }}">{{ $post->category->name; }}</a></p>
-<p><a href="/posts">go to the main page</a></p>
-@endsection
+        <x-single-post :post="$post" />
+
+    </x-slot>
+</x-layout>
