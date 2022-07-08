@@ -13,7 +13,7 @@
                     class="py-2 pl-3 pr-9 text-sm font-semibold w-32"
                     style="display: inline-flex;">
         
-                        {{ isset($currentCategory) ? $currentCategory->name : 'Categories';}}
+                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories';}}
 
                         <x-down-arrow class="absolute pointer-events-none" style="right: 12px;"/>
                     </button>
