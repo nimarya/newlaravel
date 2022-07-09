@@ -16,7 +16,7 @@
                 <x-post-card :post="$post" />
                 @endforeach
             </div>
-
+            {{ $posts->links(); }}
         </main>
     </x-slot>
 </x-layout>
