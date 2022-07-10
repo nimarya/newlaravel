@@ -5,6 +5,7 @@
             <h1 class="text-center font-bold text-xl">Register!</h1>
 
             <form action="/register" method="post" class="mt-10">
+                @csrf
                 <div class="mb-6">
 
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
