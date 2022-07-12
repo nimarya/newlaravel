@@ -17,7 +17,8 @@
                     <input class="border border-gray-400 p-2 w-full"
                             type="text" 
                             name="name" 
-                            id="name" 
+                            id="name"
+                            value = "{{ old('name'); }}" 
                             required
                     >
 
@@ -38,7 +39,8 @@
                     <input class="border border-gray-400 p-2 w-full"
                             type="text" 
                             name="username" 
-                            id="username" 
+                            id="username"
+                            value = "{{ old('username'); }}" 
                             required
                     >
 
@@ -59,7 +61,8 @@
                     <input class="border border-gray-400 p-2 w-full"
                             type="text" 
                             name="email" 
-                            id="email" 
+                            id="email"
+                            value = "{{ old('email'); }}" 
                             required
                     >
 
