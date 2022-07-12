@@ -16,7 +16,7 @@ class RegisterController extends Controller
     {
         $attributes = request()->validate([
             'name' => 'required|max:255',
-            'username' => 'required|max:255',
+            'username' => 'required|max:255|unique:users,username',
             'email' => 'required|max:255|email',
             'password' => 'required|max:255|min:7',
         ]);
