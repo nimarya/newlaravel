@@ -21,7 +21,7 @@ class RegisterController extends Controller
             'password' => 'required|max:255|min:7',
         ]);
 
-        $user = User::create($attributes);
+        $user = User::create($attributes); // User::setPasswordAttribute runs automatically
 
         auth()->login($user);
 
