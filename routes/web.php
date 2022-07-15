@@ -17,3 +17,29 @@ Route::get('/login', [SessionsController::class, 'create'])->middleware('guest')
 Route::post('/login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+Route::post('/newsletter', function () {
+    request()->validate(['email' => 'required|email',]);
+
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us9',
+    ]);
+
+    try {
+        $response = $mailchimp->lists->addListMember("ef08c37569", [
+            'email_address' => request('email'),
+            "status" => "subscribed",
+        ]);
+    } catch (\Exception $e) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email cannot be verified.',
+        ]);
+    }
+
+
+    return redirect('/posts')
+        ->with('success', 'You are now subscribed!');
+});
