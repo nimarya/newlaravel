@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -19,18 +20,4 @@ Route::post('/login', [SessionsController::class, 'store'])->middleware('guest')
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-Route::post('/newsletter', function (Newsletter $newsletter) {
-    request()->validate(['email' => 'required|email',]);
-
-    try {
-        $newsletter->subscribe(request('email'));
-    } catch (\Exception $e) {
-        throw \Illuminate\Validation\ValidationException::withMessages([
-            'email' => 'This email cannot be verified.',
-        ]);
-    }
-
-
-    return redirect('/posts')
-        ->with('success', 'You are now subscribed!');
-});
+Route::post('/newsletter', NewsletterController::class);
