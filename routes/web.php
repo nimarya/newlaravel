@@ -4,6 +4,7 @@ use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/posts', [PostController::class, 'index']);
@@ -18,21 +19,11 @@ Route::post('/login', [SessionsController::class, 'store'])->middleware('guest')
 
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-Route::post('/newsletter', function () {
+Route::post('/newsletter', function (Newsletter $newsletter) {
     request()->validate(['email' => 'required|email',]);
 
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us9',
-    ]);
-
     try {
-        $response = $mailchimp->lists->addListMember("ef08c37569", [
-            'email_address' => request('email'),
-            "status" => "subscribed",
-        ]);
+        $newsletter->subscribe(request('email'));
     } catch (\Exception $e) {
         throw \Illuminate\Validation\ValidationException::withMessages([
             'email' => 'This email cannot be verified.',
