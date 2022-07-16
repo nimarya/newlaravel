@@ -27,10 +27,6 @@ class PostController extends Controller
 
     public function create()
     {
-        if (auth()->user()?->username != 'nimarya') {
-            abort(403);
-        }
-
         return view('posts.create');
     }
 }
