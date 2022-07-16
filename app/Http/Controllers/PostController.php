@@ -32,6 +32,18 @@ class PostController extends Controller
 
     public function store()
     {
-        ddd(request('title'));
+        $attributes = request()->validate([
+            'title' => 'required|max:255',
+            'slug' => 'required|max:255|unique:posts,slug',
+            'excerpt' => 'required|max:255',
+            'body' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+
+        Post::create($attributes);
+
+        return redirect('/posts');
     }
 }

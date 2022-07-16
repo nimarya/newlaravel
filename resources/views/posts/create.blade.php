@@ -29,6 +29,28 @@
                 <div class="mb-6">
 
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                            for="slug"
+                    >
+                        Slug
+                    </label>
+
+                    <input class="border border-gray-400 p-2 w-full"
+                            type="text" 
+                            name="slug" 
+                            id="slug"
+                            value = "{{ old('slug'); }}" 
+                            required
+                    >
+
+                    @error ('slug')
+                        <p class="text-red-500 text-xs mt-1">{{ $message; }}</p>
+                    @enderror
+
+                </div>
+
+                <div class="mb-6">
+
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                             for="excerpt"
                     >
                         Excerpt
@@ -37,9 +59,8 @@
                     <textarea class="border border-gray-400 p-2 w-full"
                             name="excerpt" 
                             id="excerpt"
-                            value = "{{ old('excerpt'); }}" 
                             required
-                    ></textarea>
+                    >{{ old('excerpt'); }}</textarea>
 
                     @error ('excerpt')
                         <p class="text-red-500 text-xs mt-1">{{ $message; }}</p>
@@ -58,9 +79,8 @@
                     <textarea class="border border-gray-400 p-2 w-full"
                             name="body" 
                             id="body"
-                            value = "{{ old('body'); }}" 
                             required
-                    ></textarea>
+                    >{{ old('body'); }}</textarea>
 
                     @error ('body')
                         <p class="text-red-500 text-xs mt-1">{{ $message; }}</p>
@@ -78,7 +98,10 @@
 
                     <select name="category_id" id="category_id">
                         @foreach (App\Models\Category::all() as $category)
-                            <option value="{{ $category->id; }}">{{ ucwords($category->name); }}</option>
+                            <option 
+                                value="{{ $category->id; }}"
+                                {{ old('category_id') == $category->id ? 'selected' : ''; }}
+                                >{{ ucwords($category->name); }}</option>
                         @endforeach
                     </select>
 
