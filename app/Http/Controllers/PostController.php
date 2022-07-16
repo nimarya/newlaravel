@@ -24,4 +24,13 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function create()
+    {
+        if (auth()->user()?->username != 'nimarya') {
+            abort(403);
+        }
+
+        return view('posts.create');
+    }
 }
