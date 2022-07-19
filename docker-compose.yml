@@ -42,4 +42,4 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
 
 volumes:
-    mysql:
+  mysql:
