@@ -33,6 +33,10 @@
                             New post
                         </x-dropdown-item>
 
+                        <x-dropdown-item href="/admin/dashboard" :active="request()->is('admin/dashboard')">
+                            Dashboard
+                        </x-dropdown-item>
+
                         <x-dropdown-item href="#" @click.prevent="document.querySelector('#logout-form').submit()">
                             Log out
                         </x-dropdown-item>
