@@ -1,63 +1,21 @@
 <x-layout>
     <section>
-        <main class="max-w-lg mx-auto mt-18 bg-gray-100 border border-gray-200 p-6 rounded-xl">
+        <main class="max-w-lg mx-auto mt-18 p-6 rounded-xl">
+            <x-panel>
 
-            <h1 class="text-center font-bold text-xl">Log in!</h1>
+                <h1 class="text-center font-bold text-xl">Log in!</h1>
 
-            <form action="/login" method="post" class="mt-10">
-                @csrf
+                <form action="/login" method="post" class="mt-10">
+                    @csrf
 
-                <div class="mb-6">
+                    <x-form.input name="email" type="email" autocomplete="username"/>
+                    <x-form.input name="password" type="password" autocomplete="current-password"/>
 
-                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="email"
-                    >
-                        Email
-                    </label>
+                    <x-form.button>Log in</x-form.button>
 
-                    <input class="border border-gray-400 p-2 w-full"
-                            type="text" 
-                            name="email" 
-                            id="email"
-                            value = "{{ old('email'); }}" 
-                            required
-                    >
+                </form>
 
-                    @error ('email')
-                        <p class="text-red-500 text-xs mt-1">{{ $message; }}</p>
-                    @enderror
-
-                </div>
-
-                <div class="mb-6">
-
-                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="password"
-                    >
-                        Password
-                    </label>
-
-                    <input class="border border-gray-400 p-2 w-full"
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            required
-                    >
-
-                    @error ('password')
-                        <p class="text-red-500 text-xs mt-1">{{ $message; }}</p>
-                    @enderror
-
-                </div>
-
-                <div class="mb-6">
-                    <button type="submit"
-                            class="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-500">
-                        Log in
-                    </button>
-                </div>
-
-            </form>
+            </x-panel>
         </main>
     </section>    
 </x-layout>
