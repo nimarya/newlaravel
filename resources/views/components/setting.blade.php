@@ -16,11 +16,12 @@
                         class="hover:text-blue-500 {{ request()->is('admin/posts/create') ? 'text-blue-500' : ''; }}"
                     >New Post</a>
                 </li>
+   
                 <li>
                     <a 
-                        href="/admin/dashboard" 
-                        class="hover:text-blue-500 {{ request()->is('admin/dashboard') ? 'text-blue-500' : ''; }}"
-                    >Dashboard</a>
+                        href="/admin/posts" 
+                        class="hover:text-blue-500 {{ request()->is('admin/posts') ? 'text-blue-500' : ''; }}"
+                    >Manage Posts</a>
                 </li>
             </ul>
         </aside>
