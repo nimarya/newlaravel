@@ -13,4 +13,29 @@ class AdminPostController extends Controller
             'posts' => Post::paginate(50),
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.posts.create');
+    }
+
+    public function store()
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => 'required|image',
+            'slug' => 'required|unique:posts,slug',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+
+        Post::create($attributes);
+
+        return redirect('/posts');
+    }
 }
