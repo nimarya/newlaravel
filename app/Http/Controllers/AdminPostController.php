@@ -38,4 +38,11 @@ class AdminPostController extends Controller
 
         return redirect('/posts');
     }
+
+    public function edit(Post $post)
+    {
+        return view('admin.posts.edit', [
+            'post' => $post,
+        ]);
+    }
 }
