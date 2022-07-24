@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
@@ -44,5 +45,25 @@ class AdminPostController extends Controller
         return view('admin.posts.edit', [
             'post' => $post,
         ]);
+    }
+
+    public function update(Post $post)
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => 'image',
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        if (isset($attributes['thumbnail'])) {
+            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        }
+
+        $post->update($attributes);
+
+        return back()->with('success', 'Post Updated');
     }
 }
