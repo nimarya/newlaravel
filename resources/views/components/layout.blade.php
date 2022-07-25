@@ -29,7 +29,7 @@
                             <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name; }}!</button>
                         </x-slot>
 
-                        @if (auth()->user()->can('admin'))
+                        @can('admin')
                             <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">
                                 New post
                             </x-dropdown-item>
@@ -37,7 +37,7 @@
                             <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">
                                 Manage posts
                             </x-dropdown-item>
-                        @endif
+                        @endcan
 
                         <x-dropdown-item href="#" @click.prevent="document.querySelector('#logout-form').submit()">
                             Log out
